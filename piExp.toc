@@ -1,8 +1,8 @@
 ## Interface: 80000
 
-## Title: piExp2
+## Title: piExp
 ## Notes: Simple light weight addon to display experience changes in your Chat Frame.
 ## Author: Shockr
-## SavedVariables: piExp2
+## SavedVariables: piExp
 
-piExp2.lua
+piExp.lua
