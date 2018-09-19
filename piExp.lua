@@ -109,8 +109,6 @@ function PiExp_ScanAndReportAzerite()
                         PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_stringComma(repsToNextLevel) .. PiExp_Colors.PiExp_light .. " reps)"
 
     DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
-
-    -- DEFAULT_CHAT_FRAME:AddMessage(string.format("GAL AZERITE_ITEM_EXPERIENCE_CHANGED old AP: %d new AP: %d - Level %d", oldExperienceAmount, newExperienceAmount, GetPowerLevel(azeriteItemLocation)))
 end
 
 local eventFrame = CreateFrame("Frame")
