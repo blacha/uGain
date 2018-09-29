@@ -11,15 +11,48 @@ local PiExp_Colors = {
     PiExp_resume = "|r",
 }
 
-function PiExp_stringComma( number )
-
+-- Convert a number to a formated number
+-- eg 1023 -> 1,023
+function PiExp_StringComma(number)
     while true do
         number, k = string.gsub( number, "^(-?%d+)(%d%d%d)", "%1,%2" )
         if ( k == 0 ) then break end
     end
 
     return number
+end
 
+-- Find all windwos with CombatXPGain and print our messages there
+function PiExp_PrintToXPWindow(message)
+    local success = false
+    for i = 1, NUM_CHAT_WINDOWS do
+        frame = _G[ "ChatFrame" .. i ]:IsEventRegistered( "CHAT_MSG_COMBAT_XP_GAIN" ) and _G[ "ChatFrame" .. i ]
+        if frame or ( i == NUM_CHAT_WINDOWS and not success ) then
+            frame:AddMessage(message)
+            success = true
+        end
+    end
+end
+
+function PiExp_FormatChatMessage(xpType, xpChange, currentXp, nextLevelXp)
+    local remainingXp = nextLevelXp - currentXp
+    local xpGainPercent = (currentXp / nextLevelXp) * 100
+    local xpRemainingPercent = (remainingXp / nextLevelXp) * 100
+
+    local nextLevel = PiExp_CurrentLevel + 1
+    local repsToNextLevel = (floor(remainingXp/xpChange)) + 1
+
+    return PiExp_Colors.PiExp_dark .. "+" .. PiExp_StringComma(xpChange) ..
+                        PiExp_Colors.PiExp_medium .. " " .. xpType ..
+                        PiExp_Colors.PiExp_light .. " - " ..
+                        PiExp_Colors.PiExp_dark .. PiExp_StringComma(currentXp) ..
+                        PiExp_Colors.PiExp_light .. " / " ..
+                        PiExp_Colors.PiExp_dark .. PiExp_StringComma(nextLevelXp) ..
+                        PiExp_Colors.PiExp_light .. " to " ..
+                        PiExp_Colors.PiExp_medium.."lvl " ..
+                        PiExp_Colors.PiExp_dark .. nextLevel  ..
+                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_StringComma(remainingXp) .. PiExp_Colors.PiExp_light .. " xp left)" ..
+                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_StringComma(repsToNextLevel) .. PiExp_Colors.PiExp_light .. " reps)"
 end
 
 function PiExp_ScanAndReportExp()
@@ -42,27 +75,9 @@ function PiExp_ScanAndReportExp()
         return
     end
 
-    local remainingXp = nextLevelXp - currentXp
-    local xpGainPercent = (currentXp / nextLevelXp) * 100
-    local xpRemainingPercent = (remainingXp / nextLevelXp) * 100
-
-    local nextLevel = PiExp_CurrentLevel + 1
-    local repsToNextLevel = (floor(remainingXp/xpChange)) + 1
-
-
-    local chatMessage = PiExp_Colors.PiExp_dark .. "+" .. PiExp_stringComma(xpChange) ..
-                        PiExp_Colors.PiExp_medium .. " XP" ..
-                        PiExp_Colors.PiExp_light .. " - " ..
-                        PiExp_Colors.PiExp_dark .. PiExp_stringComma(currentXp) ..
-                        PiExp_Colors.PiExp_light .. " / " ..
-                        PiExp_Colors.PiExp_dark .. PiExp_stringComma(nextLevelXp) ..
-                        PiExp_Colors.PiExp_light .. " to " ..
-                        PiExp_Colors.PiExp_medium.."lvl " ..
-                        PiExp_Colors.PiExp_dark .. nextLevel  ..
-                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_stringComma(remainingXp) .. PiExp_Colors.PiExp_light .. " xp left)" ..
-                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_stringComma(repsToNextLevel) .. PiExp_Colors.PiExp_light .. " reps)"
-
-    DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
+    local chatMessage = PiExp_FormatChatMessage("XP", xpChange, currentXp, nextLevelXp)
+    -- DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
+    PiExp_PrintToXPWindow(chatMessage)
 end
 
 function PiExp_ScanAndReportAzerite()
@@ -79,36 +94,20 @@ function PiExp_ScanAndReportAzerite()
     local xpChange = currentXp - PiAzerite_CurrentExp
     PiAzerite_CurrentExp = currentXp
 
+    -- Xp was reset skip..
     if xpChange == 0  then
         return
     end
 
+    -- Level change occured dont message anything
     if currentLevel ~= PiAzerite_LevelCurrent then
         PiAzerite_LevelCurrent = currentLevel
         return
     end
 
-    local remainingXp = nextLevelXp - currentXp
-    local xpGainPercent = (currentXp / nextLevelXp) * 100
-    local xpRemainingPercent = (remainingXp / nextLevelXp) * 100
-
-    local nextLevel = PiAzerite_LevelCurrent + 1
-    local repsToNextLevel = (floor(remainingXp/xpChange)) + 1
-
-
-    local chatMessage = PiExp_Colors.PiExp_dark .. "+" .. PiExp_stringComma(xpChange) ..
-                        PiExp_Colors.PiExp_medium .. " Azerite" ..
-                        PiExp_Colors.PiExp_light .. " - " ..
-                        PiExp_Colors.PiExp_dark .. PiExp_stringComma(currentXp) ..
-                        PiExp_Colors.PiExp_light .. " / " ..
-                        PiExp_Colors.PiExp_dark .. PiExp_stringComma(nextLevelXp) ..
-                        PiExp_Colors.PiExp_light .. " to " ..
-                        PiExp_Colors.PiExp_medium.."lvl " ..
-                        PiExp_Colors.PiExp_dark .. nextLevel  ..
-                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_stringComma(remainingXp) .. PiExp_Colors.PiExp_light .. " xp left)" ..
-                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_stringComma(repsToNextLevel) .. PiExp_Colors.PiExp_light .. " reps)"
-
+    local chatMessage = PiExp_FormatChatMessage("AP", xpChange, currentXp, nextLevelXp)
     DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
+    PiExp_PrintToXPWindow(chatMessage)
 end
 
 local eventFrame = CreateFrame("Frame")
@@ -130,3 +129,30 @@ eventFrame:SetScript("OnEvent", function(self, event, data)
         PiExp_ScanAndReportAzerite()
     end
 end)
+
+-- Filter out XP Gains
+function PiExp_FilterCombatXpGain(self, event, msg, ...)
+    local xpGained = string.match(msg, "ou gain (%d+) experience")
+    if xpGained then
+        return true
+    else
+        return false
+    end
+end
+ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_XP_GAIN", PiExp_FilterCombatXpGain)
+
+-- Filter out both Azerite Item gains, and Azedrite Power gains
+local PiExp_AzeritePowerItem = "Hitem:158075:"
+local PiExp_AzertieItem = "Hcurrency:1553:"
+function PiExp_FilterAzeriteGain(self, event, msg, ...)
+    local azeriteItem = string.match(msg, PiExp_AzertieItem)
+    local azeritePower = string.match(msg, PiExp_AzeritePowerItem)
+
+    if azeriteItem or azeritePower then
+        DEFAULT_CHAT_FRAME:AddMessage("matched AI:".. azeriteItem .. " AP:" .. azeritePower)
+        return true
+    end
+
+    return false
+end
+ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", PiExp_FilterAzeriteGain )

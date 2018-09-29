@@ -1,6 +1,6 @@
 # piExp
 
-Simple lightweigth addon that puts XP & Azerite Change into your chat window
+Replaces XP & Azerite gains into your chat windows.
 
 Update of Exp2 for WoW 8.0+
 
