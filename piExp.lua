@@ -5,10 +5,10 @@ local PiAzerite_CurrentExp = 0;
 local PiAzerite_CurrentLevel = 0
 
 local PiExp_Colors = {
-    PiExp_light = "|cffffc2a1",
-    PiExp_medium = "|cffff9a63",
-    PiExp_dark = "|cffff7831",
-    PiExp_resume = "|r",
+    light = "|cFFABD6F4",
+    medium = "|cFF03FFAC",
+    dark = "|cFF02FEDC",
+    resume = "|r",
 }
 
 -- Convert a number to a formated number
@@ -34,25 +34,23 @@ function PiExp_PrintToXPWindow(message)
     end
 end
 
-function PiExp_FormatChatMessage(xpType, xpChange, currentXp, nextLevelXp)
+function PiExp_FormatChatMessage(xpType, xpChange, currentXp,  nextLevelXp, nextLevel)
     local remainingXp = nextLevelXp - currentXp
     local xpGainPercent = (currentXp / nextLevelXp) * 100
     local xpRemainingPercent = (remainingXp / nextLevelXp) * 100
 
-    local nextLevel = PiExp_CurrentLevel + 1
     local repsToNextLevel = (floor(remainingXp/xpChange)) + 1
 
-    return PiExp_Colors.PiExp_dark .. "+" .. PiExp_StringComma(xpChange) ..
-                        PiExp_Colors.PiExp_medium .. " " .. xpType ..
-                        PiExp_Colors.PiExp_light .. " - " ..
-                        PiExp_Colors.PiExp_dark .. PiExp_StringComma(currentXp) ..
-                        PiExp_Colors.PiExp_light .. " / " ..
-                        PiExp_Colors.PiExp_dark .. PiExp_StringComma(nextLevelXp) ..
-                        PiExp_Colors.PiExp_light .. " to " ..
-                        PiExp_Colors.PiExp_medium.."lvl " ..
-                        PiExp_Colors.PiExp_dark .. nextLevel  ..
-                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_StringComma(remainingXp) .. PiExp_Colors.PiExp_light .. " xp left)" ..
-                        PiExp_Colors.PiExp_light .. " (" .. PiExp_Colors.PiExp_dark .. PiExp_StringComma(repsToNextLevel) .. PiExp_Colors.PiExp_light .. " reps)"
+    return PiExp_Colors.dark .. "+" .. PiExp_StringComma(xpChange) ..
+            PiExp_Colors.medium .. " " .. xpType ..
+            PiExp_Colors.light .. " - " ..
+            PiExp_Colors.light .. PiExp_StringComma(currentXp) ..
+            PiExp_Colors.light .. " / " ..
+            PiExp_Colors.light .. PiExp_StringComma(nextLevelXp) ..
+            PiExp_Colors.light .. " to lvl " ..
+            PiExp_Colors.dark .. nextLevel  ..
+            PiExp_Colors.light .. " (" .. PiExp_Colors.medium .. PiExp_StringComma(remainingXp) .. PiExp_Colors.light .. " " .. xpType .. " left)" ..
+            PiExp_Colors.light .. " (" .. PiExp_Colors.medium .. PiExp_StringComma(repsToNextLevel) .. PiExp_Colors.light .. " reps)"
 end
 
 function PiExp_ScanAndReportExp()
@@ -75,7 +73,7 @@ function PiExp_ScanAndReportExp()
         return
     end
 
-    local chatMessage = PiExp_FormatChatMessage("XP", xpChange, currentXp, nextLevelXp)
+    local chatMessage = PiExp_FormatChatMessage("XP", xpChange, currentXp, nextLevelXp, currentLevel + 1)
     -- DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
     PiExp_PrintToXPWindow(chatMessage)
 end
@@ -105,8 +103,8 @@ function PiExp_ScanAndReportAzerite()
         return
     end
 
-    local chatMessage = PiExp_FormatChatMessage("AP", xpChange, currentXp, nextLevelXp)
-    DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
+    local chatMessage = PiExp_FormatChatMessage("AP", xpChange, currentXp, nextLevelXp, currentLevel + 1)
+    -- DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
     PiExp_PrintToXPWindow(chatMessage)
 end
 
