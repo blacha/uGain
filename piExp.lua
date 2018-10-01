@@ -103,7 +103,7 @@ function PiExp_ScanAndReportAzerite()
         return
     end
 
-    local chatMessage = PiExp_FormatChatMessage("AP", xpChange, currentXp, nextLevelXp, currentLevel + 1)
+    local chatMessage = PiExp_FormatChatMessage("Azerite", xpChange, currentXp, nextLevelXp, currentLevel + 1)
     -- DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
     PiExp_PrintToXPWindow(chatMessage)
 end
