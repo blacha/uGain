@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 11302
 
 ## Title: piExp
 ## Notes: Simple light weight addon to display experience changes in your Chat Frame.

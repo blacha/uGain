@@ -78,41 +78,11 @@ function PiExp_ScanAndReportExp()
     PiExp_PrintToXPWindow(chatMessage)
 end
 
-function PiExp_ScanAndReportAzerite()
-	local azeriteItemLocation = C_AzeriteItem.FindActiveAzeriteItem();
-
-	if (not azeriteItemLocation) then
-		return;
-    end
-
-    local azeriteItem = Item:CreateFromItemLocation(azeriteItemLocation);
-	local currentXp, nextLevelXp = C_AzeriteItem.GetAzeriteItemXPInfo(azeriteItemLocation);
-    currentLevel = C_AzeriteItem.GetPowerLevel(azeriteItemLocation);
-
-    local xpChange = currentXp - PiAzerite_CurrentExp
-    PiAzerite_CurrentExp = currentXp
-
-    -- Xp was reset skip..
-    if xpChange == 0  then
-        return
-    end
-
-    -- Level change occured dont message anything
-    if currentLevel ~= PiAzerite_LevelCurrent then
-        PiAzerite_LevelCurrent = currentLevel
-        return
-    end
-
-    local chatMessage = PiExp_FormatChatMessage("Azerite", xpChange, currentXp, nextLevelXp, currentLevel + 1)
-    -- DEFAULT_CHAT_FRAME:AddMessage(chatMessage)
-    PiExp_PrintToXPWindow(chatMessage)
-end
 
 local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("PLAYER_XP_UPDATE")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
-eventFrame:RegisterEvent("AZERITE_ITEM_EXPERIENCE_CHANGED")
-eventFrame:RegisterEvent("AZERITE_ITEM_POWER_LEVEL_CHANGED")
+
 
 eventFrame:SetScript("OnEvent", function(self, event, data)
     if event == "PLAYER_ENTERING_WORLD" then
@@ -121,10 +91,6 @@ eventFrame:SetScript("OnEvent", function(self, event, data)
         PiExp_ScanAndReportAzerite()
     elseif event == "PLAYER_XP_UPDATE" then
         PiExp_ScanAndReportExp()
-    elseif event == "AZERITE_ITEM_EXPERIENCE_CHANGED" then
-        PiExp_ScanAndReportAzerite()
-    elseif event == "AZERITE_ITEM_POWER_LEVEL_CHANGED" then
-        PiExp_ScanAndReportAzerite()
     end
 end)
 
@@ -139,18 +105,3 @@ function PiExp_FilterCombatXpGain(self, event, msg, ...)
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_XP_GAIN", PiExp_FilterCombatXpGain)
 
--- Filter out both Azerite Item gains, and Azedrite Power gains
-local PiExp_AzeritePowerItem = "Hitem:158075:"
-local PiExp_AzertieItem = "Hcurrency:1553:"
-function PiExp_FilterAzeriteGain(self, event, msg, ...)
-    local azeriteItem = string.match(msg, PiExp_AzertieItem)
-    local azeritePower = string.match(msg, PiExp_AzeritePowerItem)
-
-    if azeriteItem or azeritePower then
-        DEFAULT_CHAT_FRAME:AddMessage("matched AI:".. azeriteItem .. " AP:" .. azeritePower)
-        return true
-    end
-
-    return false
-end
-ChatFrame_AddMessageEventFilter("CHAT_MSG_SYSTEM", PiExp_FilterAzeriteGain )
