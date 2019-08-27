@@ -1,9 +1,8 @@
 # piExp
 
-Replaces XP & Azerite gains in your chat windows.
+Replaces XP gains in your chat windows.
 
-Update of Exp2 for WoW 8.0+
+Update of Exp2 for WoW classic
 
 
 ![XP Gain](./images/XPGain.png)
-![Azerite Gain](./images/AzeriteGain.png)
