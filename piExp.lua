@@ -88,7 +88,7 @@ eventFrame:SetScript("OnEvent", function(self, event, data)
     if event == "PLAYER_ENTERING_WORLD" then
         PiExp_CurrentExp = UnitXP("player")
         PiExp_CurrentLevel = UnitLevel("player")
-        PiExp_ScanAndReportAzerite()
+        PiExp_ScanAndReportExp()
     elseif event == "PLAYER_XP_UPDATE" then
         PiExp_ScanAndReportExp()
     end
