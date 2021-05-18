@@ -20,4 +20,4 @@ jobs:
       - name: Package and release
         uses: BigWigsMods/packager@master
         env:
-          CF_API_KEY: ${{ secrets.CF_API_TOKEN }}
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
