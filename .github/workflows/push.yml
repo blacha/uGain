@@ -7,8 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: startsWith(github.ref, 'refs/tags') == true || (!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]'))
-
+    if: startsWith(github.ref, 'refs/tags/v')
     steps:
       - name: Checkout addon
         uses: actions/checkout@v1
