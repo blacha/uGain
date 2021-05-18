@@ -1,4 +1,4 @@
-# piExp
+# uExp
 
 Replaces XP gains in your chat windows.
 
