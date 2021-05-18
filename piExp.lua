@@ -1,9 +1,6 @@
 local PiExp_CurrentExp = 0
 local PiExp_CurrentLevel = 0
 
-local PiAzerite_CurrentExp = 0;
-local PiAzerite_CurrentLevel = 0
-
 local PiExp_Colors = {
     light = "|cFFABD6F4",
     medium = "|cFF03FFAC",
