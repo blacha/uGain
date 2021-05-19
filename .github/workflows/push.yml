@@ -3,10 +3,7 @@ name: Package addon
 
 on:
   push:
-    branches:
-      - master
-    tags:
-      - "*"
+    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +23,7 @@ jobs:
 
       - name: Package and release (Classic)
         uses: BigWigsMods/packager@master
-        if: ${{ github.event_name != 'pull_request' }}
+        if: github.ref == 'refs/heads/master'
         with:
           args: -g classic
         env:
@@ -34,7 +31,7 @@ jobs:
 
       - name: Package and release (TBC)
         uses: BigWigsMods/packager@master
-        if: ${{ github.event_name != 'pull_request' }}
+        if: github.ref == 'refs/heads/master'
         with:
           args: -g bcc
         env:
