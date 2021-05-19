@@ -19,6 +19,7 @@ jobs:
         uses: BigWigsMods/actions/luacheck@master
         with:
           args: -q
+          annotate: warning
 
       - name: Package and release (Classic)
         uses: BigWigsMods/packager@master
