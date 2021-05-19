@@ -1,1 +1,6 @@
 package-as: uExp
+move-folders:
+  uExp/uExp: uExp
+
+ignore: 
+  - images/*
