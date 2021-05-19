@@ -97,12 +97,7 @@ end)
 
 -- Filter out XP Gains
 local function uExp_FilterCombatXpGain(self, event, msg, ...)
-    local xpGained = string.match(msg, "ou gain (%d+) experience")
-    if xpGained then
-        return true
-    else
-        return false
-    end
+    return true
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_XP_GAIN", uExp_FilterCombatXpGain)
 
