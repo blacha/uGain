@@ -1,0 +1,11 @@
+## Interface: 11306
+## Interface-Classic: 11306
+## Interface-BCC: 20501
+## X-Curse-Project-ID: 483581
+
+## Title: uChatNotify
+## Notes: Simple light weight addon to display pretty changes in your Chat Frame.
+## Author: Blayne 
+
+
+uShared.lua

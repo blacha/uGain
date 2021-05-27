@@ -1,6 +1,10 @@
-package-as: uExp
+package-as: uChatNotify
 move-folders:
-  uExp/uExp: uExp
+  uChatNotify/uChatNotify: uChatNotify
+  uChatNotify/uExp: uChatNotify_Exp
+  uChatNotify/uHonor: uChatNotify_Honor
+  uChatNotify/uRep: uChatNotify_Rep
 
 ignore: 
+  - .luacheckrc
   - images/*

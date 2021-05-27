@@ -3,10 +3,9 @@
 ## Interface-BCC: 20501
 ## X-Curse-Project-ID: 483581
 
-## Title: uExp
+## Title: uChatNotify_Exp
 ## Notes: Simple light weight addon to display experience changes in your Chat Frame.
 ## Author: Blayne 
-## SavedVariables: uExp
-
+## Dependencies: uChatNotify
 
 uExp.lua

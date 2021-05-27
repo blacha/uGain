@@ -10,11 +10,14 @@ ignore = {
 }
 
 read_globals = {
+	"abs",
 	"floor",
   	"UnitXP",
   	"UnitXPMax",
   	"UnitLevel",
   	"CreateFrame",
   	"ChatFrame_AddMessageEventFilter",
+	"GetNumFactions",
+	"GetFactionInfo",
   	"NUM_CHAT_WINDOWS"
 }
