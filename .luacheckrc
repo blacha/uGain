@@ -7,6 +7,7 @@ exclude_files = {
 ignore = {
     "212",
     "311",
+	"121",
 }
 
 read_globals = {
@@ -19,5 +20,10 @@ read_globals = {
   	"ChatFrame_AddMessageEventFilter",
 	"GetNumFactions",
 	"GetFactionInfo",
-  	"NUM_CHAT_WINDOWS"
+  	"NUM_CHAT_WINDOWS",
+	"uC",
+	"uShared_StringComma",
+	"uShared_GetSearchPattern",
+	"uShared_PrintAll",
+	"C_CurrencyInfo"
 }
