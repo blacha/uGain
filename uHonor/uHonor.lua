@@ -40,8 +40,8 @@ eventFrame:RegisterEvent("CHAT_MSG_COMBAT_HONOR_GAIN")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 eventFrame:SetScript("OnEvent", function(self, event, ...)
-    uHonor_OnHonorGain('You have been awarded 84 honor points.')
-    uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (8 Honor Points)')
+    -- uHonor_OnHonorGain('You have been awarded 84 honor points.')
+    -- uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (8 Honor Points)')
     if event == "CHAT_MSG_COMBAT_HONOR_GAIN" then
         uHonor_OnHonorGain(...)
     end
