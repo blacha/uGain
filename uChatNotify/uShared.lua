@@ -18,12 +18,12 @@ end
 
 -- Print a message to every chat window that has the event registered
 function uShared_PrintAll(eventName, message)
-	local frameFound = false
+    local frameFound = false
     for i = 1, NUM_CHAT_WINDOWS do
         local frame = _G["ChatFrame" .. i]
         if frame:IsEventRegistered(eventName) or (i == NUM_CHAT_WINDOWS and not frameFound) then
             frame:AddMessage(message)
-			frameFound = true
+            frameFound = true
         end
     end
 end

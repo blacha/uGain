@@ -75,7 +75,7 @@ local function uRep_ReportFaction(factionIndex)
     uShared_PrintAll("CHAT_MSG_COMBAT_FACTION_CHANGE", message)
 end
 
-local function uRep_LoadFactions() 
+local function uRep_LoadFactions()
     local factionCount = 0
     for i = 1, GetNumFactions() do
         factionCount = factionCount + 1
