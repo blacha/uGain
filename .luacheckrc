@@ -25,5 +25,6 @@ read_globals = {
 	"uShared_StringComma",
 	"uShared_GetSearchPattern",
 	"uShared_PrintAll",
-	"C_CurrencyInfo"
+	"C_CurrencyInfo",
+	"C_PvP"
 }
