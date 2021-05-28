@@ -75,17 +75,24 @@ local function uRep_ReportFaction(factionIndex)
     uShared_PrintAll("CHAT_MSG_COMBAT_FACTION_CHANGE", message)
 end
 
+local function uRep_LoadFactions() 
+    local factionCount = 0
+    for i = 1, GetNumFactions() do
+        factionCount = factionCount + 1
+        local name, _, standingId, _, _, currentRep = GetFactionInfo(i)
+        factions[name] = {}
+        factions[name].currentRep = currentRep
+        factions[name].standingId = standingId
+
+    end
+    isReady = factionCount > 0
+end
+
 local function uRep_ScanAndReport()
     if (not isReady) then
-        for i = 1, GetNumFactions() do
-            local name, _, standingId, _, _, currentRep = GetFactionInfo(i)
-            factions[name] = {}
-            factions[name].currentRep = currentRep
-            factions[name].standingId = standingId
-        end
-        isReady = true
-        return
+        return uRep_LoadFactions()
     end
+
     for factionIndex = 1, GetNumFactions() do
         uRep_ReportFaction(factionIndex)
     end
