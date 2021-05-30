@@ -1,7 +1,7 @@
 package-as: uGain
 move-folders:
   uGain/uGain: uGain
-  uGain/uExp: uGain_Exp
+  uGain/uXp: uGain_Xp
   uGain/uHonor: uGain_Honor
   uGain/uRep: uGain_Rep
 
