@@ -3,9 +3,9 @@
 ## Interface-BCC: 20501
 ## X-Curse-Project-ID: 483581
 
-## Title: uChatNotify_Honor
+## Title: uGain_Honor
 ## Notes: Simple light weight addon to display honor changes in your Chat Frame.
 ## Author: Blayne 
-## Dependencies: uChatNotify
+## Dependencies: uGain
 
 uHonor.lua

@@ -3,9 +3,9 @@
 ## Interface-BCC: 20501
 ## X-Curse-Project-ID: 483581
 
-## Title: uChatNotify
-## Notes: Simple light weight addon to display pretty changes in your Chat Frame.
+## Title: uGain_Rep
+## Notes: Simple light weight addon to display reputation changes in your Chat Frame.
 ## Author: Blayne 
 
 
-uShared.lua
+uRep.lua

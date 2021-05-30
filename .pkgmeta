@@ -1,9 +1,9 @@
-package-as: uChatNotify
+package-as: uGain
 move-folders:
-  uChatNotify/uChatNotify: uChatNotify
-  uChatNotify/uExp: uChatNotify_Exp
-  uChatNotify/uHonor: uChatNotify_Honor
-  uChatNotify/uRep: uChatNotify_Rep
+  uGain/uGain: uGain
+  uGain/uExp: uGain_Exp
+  uGain/uHonor: uGain_Honor
+  uGain/uRep: uGain_Rep
 
 ignore: 
   - .luacheckrc

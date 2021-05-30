@@ -1,8 +1,8 @@
-# uChatNotify
+# uGain
 
 A collection of addons for WoW Classic/TBC
 
-## uExp
+## uXp
 
 Replaces XP gains in your chat windows.
 
