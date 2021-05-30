@@ -49,7 +49,6 @@ eventFrame:RegisterEvent("PLAYER_XP_UPDATE")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 eventFrame:SetScript("OnEvent", function(self, event, data)
-    print("Hello")
     if event == "PLAYER_ENTERING_WORLD" then
         uXp_CurrentExp = UnitXP("player")
         uXp_CurrentLevel = UnitLevel("player")
@@ -64,5 +63,5 @@ local function uXp_FilterCombatXpGain(self, event, msg, ...)
     return true
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_XP_GAIN", uXp_FilterCombatXpGain)
-
 -- "Greater Diskbat dies, you gain 142 experience (+71 Rested bounus)"
+-- "Greater Diskbat dies, you gain 142 experience"
