@@ -36,7 +36,7 @@ local function uXp_ScanAndReportExp()
 
     -- Level change occured dont message anything
     if currentLevel ~= uXp_CurrentLevel then
-        uXp_CurrentLevel = currentLevel 
+        uXp_CurrentLevel = currentLevel
         return
     end
 
