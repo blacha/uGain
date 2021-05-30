@@ -12,11 +12,11 @@ local function uExp_FormatChatMessage(xpChange, currentXp, nextLevelXp, nextLeve
     local remainingXp = nextLevelXp - currentXp
     local repsToNextLevel = floor(remainingXp / xpChange) + 1
 
-    local xpGain = C.dark .. "+" .. uShared_StringComma(xpChange) .. C.medium .. " XP"
-    local xpToNextLevel = C.light .. " - " .. uShared_StringComma(currentXp) .. " / " ..
-                              uShared_StringComma(nextLevelXp) .. C.light .. " to lvl " .. C.dark .. nextLevel
-    local xpLeft = C.light .. " (" .. C.medium .. uShared_StringComma(remainingXp) .. C.light .. " XP left)"
-    local xpReps = C.light .. " (" .. C.medium .. uShared_StringComma(repsToNextLevel) .. C.light .. " reps)"
+    local xpGain = uC("+" .. uShared_StringComma(xpChange), C.dark) .. " XP - "
+    local xpToNextLevel = uC(uShared_StringComma(currentXp), C.dark) .. " / " ..
+                              uC(uShared_StringComma(nextLevelXp), C.light)
+    local xpLeft = ",  " .. uC(uShared_StringComma(remainingXp), C.dark) .. " XP to lvl " .. uC(nextLevel, C.dark)
+    local xpReps = " (" .. uC(uShared_StringComma(repsToNextLevel), C.dark) .. " reps)"
 
     return xpGain .. xpToNextLevel .. xpLeft .. xpReps
 end
@@ -36,7 +36,7 @@ local function uExp_ScanAndReportExp()
 
     -- Level change occured dont message anything
     if currentLevel ~= uExp_CurrentLevel then
-        uExp_CurrentLevel = currentLevel
+        uExp_CurrentLevel = currentLevel 
         return
     end
 
@@ -49,6 +49,7 @@ eventFrame:RegisterEvent("PLAYER_XP_UPDATE")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 eventFrame:SetScript("OnEvent", function(self, event, data)
+    print("Hello")
     if event == "PLAYER_ENTERING_WORLD" then
         uExp_CurrentExp = UnitXP("player")
         uExp_CurrentLevel = UnitLevel("player")
@@ -64,3 +65,4 @@ local function uExp_FilterCombatXpGain(self, event, msg, ...)
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_XP_GAIN", uExp_FilterCombatXpGain)
 
+-- "Greater Diskbat dies, you gain 142 experience (+71 Rested bounus)"
