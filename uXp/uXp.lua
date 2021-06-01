@@ -16,7 +16,7 @@ local function uXp_FormatChatMessage(xpChange, currentXp, nextLevelXp, nextLevel
     local xpToNextLevel = uC(uShared_StringComma(currentXp), C.dark) .. " / " ..
                               uC(uShared_StringComma(nextLevelXp), C.light)
     local xpLeft = ",  " .. uC(uShared_StringComma(remainingXp), C.dark) .. " XP to lvl " .. uC(nextLevel, C.dark)
-    local xpReps = " (" .. uC(uShared_StringComma(repsToNextLevel), C.dark) .. " reps)"
+    local xpReps = " (" .. uC(uShared_StringComma(repsToNextLevel), C.dark) .. " reps)."
 
     return xpGain .. xpToNextLevel .. xpLeft .. xpReps
 end

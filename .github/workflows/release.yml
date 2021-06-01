@@ -29,7 +29,6 @@ jobs:
 
       - name: Package and release (TBC)
         uses: BigWigsMods/packager@master
-        if: github.ref == 'refs/heads/master'
         with:
           args: -g bcc
         env:
