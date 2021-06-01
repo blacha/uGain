@@ -67,8 +67,7 @@ eventFrame:RegisterEvent("ZONE_CHANGED")
 eventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 
 eventFrame:SetScript("OnEvent", function(self, eventName, ...)
-    -- uHonor_OnHonorGain('You have been awarded 85 honor points.')
-    -- uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (8 Honor Points)')
+
     if eventName == "CHAT_MSG_COMBAT_HONOR_GAIN" then
         uHonor_OnHonorGain(...)
     else
@@ -83,3 +82,5 @@ local function uHonor_FiltertHonorGain(self, event, msg, ...)
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_HONOR_GAIN", uHonor_FiltertHonorGain)
 
+-- uHonor_OnHonorGain('You have been awarded 85 honor points.')
+-- uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (8 Honor Points)')

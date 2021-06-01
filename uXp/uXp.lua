@@ -63,5 +63,6 @@ local function uXp_FilterCombatXpGain(self, event, msg, ...)
     return true
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_XP_GAIN", uXp_FilterCombatXpGain)
+
 -- "Greater Diskbat dies, you gain 142 experience (+71 Rested bounus)"
 -- "Greater Diskbat dies, you gain 142 experience"
