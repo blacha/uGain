@@ -21,14 +21,6 @@ jobs:
           args: -q
           annotate: warning
 
-      - name: Package and release (Classic)
-        uses: BigWigsMods/packager@master
-        if: github.ref == 'refs/heads/master'
-        with:
-          args: -g classic
-        env:
-          CF_API_KEY: ${{ secrets.CF_API_KEY }}
-
       - name: Package and release (TBC)
         uses: BigWigsMods/packager@master
         if: github.ref == 'refs/heads/master'
