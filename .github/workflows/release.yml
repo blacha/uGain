@@ -3,6 +3,12 @@ name: Package addon
 
 on:
   push:
+    branches:
+      - master
+    tags:
+      - '*'
+    paths-ignore:
+      - '.github/**'
 
 jobs:
   build:
