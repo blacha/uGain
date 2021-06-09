@@ -2,7 +2,7 @@ local C = {
     white = "|cffffffff",
     yellow = "|cffffff78",
     orange = "|cffff7831",
-    red = "|cffff0000",
+    red = "|cfff8a3a8",
     resume = "|r"
 }
 local FACTION_BAR_COLORS = {
@@ -51,12 +51,15 @@ local function uRep_ReportFaction(factionIndex)
 
     local remaining
     local nextStandingId = standingId
+    local colorChange = C.orange
+
     if diff > 0 then
         remaining = barMax - currentRep
         if standingId < standingMax then
             nextStandingId = standingId + 1
         end
     else
+        colorChange = C.red
         remaining = currentRep - barMin
         if standingId > standingMin then
             nextStandingId = standingId - 1
@@ -66,7 +69,7 @@ local function uRep_ReportFaction(factionIndex)
     local change = abs(currentRep - faction.currentRep)
     local repetitions = math.ceil(remaining / change)
 
-    local message = uC(string.format("%+d", change), C.orange) .. " " .. uC(name, C.yellow) .. ", " ..
+    local message = uC(string.format("%+d", diff), colorChange) .. " " .. uC(name, C.yellow) .. ", " ..
                         uC(uShared_StringComma(remaining), C.orange) .. " more to " .. uRep_StandingText(nextStandingId) ..
                         " (" .. uC(uShared_StringComma(repetitions), C.orange) .. " reps)."
 
