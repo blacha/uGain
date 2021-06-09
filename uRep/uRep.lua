@@ -17,7 +17,7 @@ local FACTION_BAR_COLORS = {
 };
 
 local factions = {}
-local isReady = false
+local FactionCount = 0
 local standingMax = 8
 local standingMin = 1
 
@@ -76,24 +76,23 @@ local function uRep_ReportFaction(factionIndex)
 end
 
 local function uRep_LoadFactions()
-    local factionCount = 0
-    for i = 1, GetNumFactions() do
-        factionCount = factionCount + 1
+    FactionCount = GetNumFactions()
+    for i = 1, FactionCount do
         local name, _, standingId, _, _, currentRep = GetFactionInfo(i)
         factions[name] = {}
         factions[name].currentRep = currentRep
         factions[name].standingId = standingId
 
     end
-    isReady = factionCount > 0
 end
 
 local function uRep_ScanAndReport()
-    if (not isReady) then
+    local factionCount = GetNumFactions()
+    if (factionCount ~= FactionCount) then
         return uRep_LoadFactions()
     end
 
-    for factionIndex = 1, GetNumFactions() do
+    for factionIndex = 1, factionCount do
         uRep_ReportFaction(factionIndex)
     end
 end
