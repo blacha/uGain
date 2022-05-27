@@ -33,3 +33,4 @@ jobs:
           args: -g bcc
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }} 
