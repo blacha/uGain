@@ -8,3 +8,5 @@ move-folders:
 ignore: 
   - .luacheckrc
   - images/*
+
+enable-toc-creation: yes

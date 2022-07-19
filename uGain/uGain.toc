@@ -2,6 +2,7 @@
 ## Interface-Classic: 11306
 ## Interface-BCC: 20501
 ## X-Curse-Project-ID: 487894
+## X-Wago-ID: kaNeBk62
 
 ## Title: uGain
 ## Notes: Simple light weight addon to display pretty changes in your Chat Frame.
