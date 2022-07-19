@@ -1,11 +1,13 @@
-## Interface: 11306
-## Interface-Classic: 11306
-## Interface-BCC: 20501
+## Interface: 11402
+## Interface-Classic: 11402
+## Interface-BCC: 20504
 ## X-Curse-Project-ID: 487894
+## X-Wago-ID: kaNeBk62
 
 ## Title: uGain_Xp
 ## Notes: Simple light weight addon to display experience changes in your Chat Frame.
 ## Author: Blayne 
 ## Dependencies: uGain
+## Version: @project-version@
 
 uXp.lua

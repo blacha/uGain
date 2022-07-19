@@ -27,10 +27,8 @@ jobs:
           args: -q
           annotate: warning
 
-      - name: Package and release (TBC)
+      - name: Package and release
         uses: BigWigsMods/packager@master
-        with:
-          args: -g bcc
         env:
           WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
