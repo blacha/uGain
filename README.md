@@ -1,6 +1,6 @@
 # uGain
 
-A collection of addons for WoW Classic/TBC
+A collection of addons for WoW Classic/TBC & WOTLK
 
 ## uXp
 
