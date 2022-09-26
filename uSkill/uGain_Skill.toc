@@ -1,0 +1,15 @@
+## Interface: 11402
+## Interface-Classic: 11402
+## Interface-BCC: 20504
+## Interface-Wrath: 30400
+
+## X-Curse-Project-ID: 487894
+## X-Wago-ID: kaNeBk62
+
+## Title: uGain_Skill
+## Notes: Simple light weight addon to display skill changes in your Chat Frame.
+## Author: Blayne 
+## Dependencies: uGain
+## Version: @project-version@
+
+uSkill.lua
