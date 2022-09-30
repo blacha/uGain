@@ -19,3 +19,10 @@ Replaces honor gains in your chat windows
 Replaces reputation gains in your chat windows
 
 ![Rep Gain](./images/RepGain.png)
+
+
+## uSkill
+
+Replaces skill gains in your chat windows
+
+![Skill Gain](./images/SkillGain.png)
