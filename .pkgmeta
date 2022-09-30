@@ -4,6 +4,7 @@ move-folders:
   uGain/uXp: uGain_Xp
   uGain/uHonor: uGain_Honor
   uGain/uRep: uGain_Rep
+  uGain/uSkill: uGain_Skill
 
 ignore: 
   - .luacheckrc
