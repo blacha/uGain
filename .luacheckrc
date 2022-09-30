@@ -2,29 +2,31 @@
 std = "lua51"
 max_line_length = false
 exclude_files = {
-    ".luacheckrc"
+  ".luacheckrc"
 }
 ignore = {
-    "212",
-    "311",
-	"121",
+  "212",
+  "311",
+"121",
 }
 
 read_globals = {
-	"abs",
-	"floor",
-  	"UnitXP",
-  	"UnitXPMax",
-  	"UnitLevel",
-  	"CreateFrame",
-  	"ChatFrame_AddMessageEventFilter",
-	"GetNumFactions",
-	"GetFactionInfo",
-  	"NUM_CHAT_WINDOWS",
-	"uC",
-	"uShared_StringComma",
-	"uShared_GetSearchPattern",
-	"uShared_PrintAll",
-	"C_CurrencyInfo",
-	"C_PvP"
+  "abs",
+  "floor",
+  "UnitXP",
+  "UnitXPMax",
+  "UnitLevel",
+  "CreateFrame",
+  "ChatFrame_AddMessageEventFilter",
+  "GetNumFactions",
+  "GetFactionInfo",
+  "GetNumSkillLines",
+  "GetSkillLineInfo",
+  "NUM_CHAT_WINDOWS",
+  "uC",
+  "uShared_StringComma",
+  "uShared_GetSearchPattern",
+  "uShared_PrintAll",
+  "C_CurrencyInfo",
+  "C_PvP"
 }
