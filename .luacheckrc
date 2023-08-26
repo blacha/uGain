@@ -7,7 +7,7 @@ exclude_files = {
 ignore = {
   "212",
   "311",
-"121",
+  "121",
 }
 
 read_globals = {
