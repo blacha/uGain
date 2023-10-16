@@ -13,6 +13,9 @@ ignore = {
 read_globals = {
   "abs",
   "floor",
+  "mod",
+  "format",
+  "GetMoney",
   "UnitXP",
   "UnitXPMax",
   "UnitLevel",
