@@ -12,4 +12,4 @@
 ## Dependencies: uGain
 ## Version: @project-version@
 
-uXp.lua
+uGain_Xp.lua

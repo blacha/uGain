@@ -6,10 +6,9 @@
 ## X-Curse-Project-ID: 487894
 ## X-Wago-ID: kaNeBk62
 
-## Title: uGain_Skill
-## Notes: Simple light weight addon to display skill changes in your Chat Frame.
+## Title: uGain_Rep
+## Notes: Simple light weight addon to display reputation changes in your Chat Frame.
 ## Author: Blayne 
-## Dependencies: uGain
 ## Version: @project-version@
 
-uSkill.lua
+uGain_Rep.lua

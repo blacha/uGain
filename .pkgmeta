@@ -1,10 +1,10 @@
 package-as: uGain
 move-folders:
   uGain/uGain: uGain
-  uGain/uXp: uGain_Xp
-  uGain/uHonor: uGain_Honor
-  uGain/uRep: uGain_Rep
-  uGain/uSkill: uGain_Skill
+  uGain/uGain_Xp: uGain_Xp
+  uGain/uGain_Honor: uGain_Honor
+  uGain/uGain_Rep: uGain_Rep
+  uGain/uGain_Skill: uGain_Skill
 
 ignore: 
   - .luacheckrc
