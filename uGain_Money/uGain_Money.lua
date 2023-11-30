@@ -8,26 +8,32 @@ local C = {
     resume = "|r"
 }
 
+-- Format money as gg.ss.cc
+-- eg 10.32.12 = 10g 32s 12c
 local function uMoney_formatMoney(amount)
     local value = abs(amount)
     local gold = floor(value * 0.0001)
     local silver = floor(mod(value * 0.01, 100))
     local copper = floor(mod(value, 100))
 
-    if amount > 0 then
-        return format('%s+|r %s%d|r.%s%02d|r.%s%02d|r', C.gold, C.gold, gold, C.silver, silver, C.copper, copper)
-    end
-
-    return format('%s-|r %s%d|r.%s%02d|r.%s%02d|r', C.negative, C.gold, gold, C.silver, silver, C.copper, copper)
+    return format('%s%d|r.%s%02d|r.%s%02d|r', C.gold, gold, C.silver, silver, C.copper, copper)
 
 end
 
+-- Include a + or - to show money is gained or lost
+local function uMoney_formatMoneyGainLoss(amount)
+    if amount < 0 then
+        return format("%s-|r %s", C.negative, uMoney_formatMoney(amount))
+    end
+
+    return format("%s+|r %s", C.gold, uMoney_formatMoney(amount))
+end
 
 local function uMoney_scanAndReport(event)
     local currentMoney = GetMoney()
-    if LastMoney > 0 then
+    if LastMoney > -1 then
         local moneyDiff = currentMoney - LastMoney
-        uShared_PrintAll("CHAT_MSG_MONEY", uMoney_formatMoney(moneyDiff))
+        uShared_PrintAll("CHAT_MSG_MONEY", uMoney_formatMoneyGainLoss(moneyDiff) .. " (current: " .. uMoney_formatMoney(currentMoney) .. ")")
     end
     LastMoney = currentMoney
 end
@@ -39,9 +45,8 @@ eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 eventFrame:SetScript("OnEvent", uMoney_scanAndReport)
 
--- Filter out honor gains
+-- Filter out moeny gains
 local function uMoney_FilterChatMessage(self, event, msg, ...)
-    uShared_PrintAll("CHAT_MSG_MONEY", "hello")
     return true
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_MONEY", uMoney_FilterChatMessage)
