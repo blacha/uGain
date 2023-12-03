@@ -36,7 +36,7 @@ local function uHonor_getCurrent()
 
     -- Classic Era
     if GetPVPSessionStats ~= nil then
-        local hk, currenHonor = GetPVPSessionStats()
+        local _, currenHonor = GetPVPSessionStats()
         return currenHonor
     end
 

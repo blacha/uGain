@@ -21,6 +21,8 @@ read_globals = {
   "UnitLevel",
   "CreateFrame",
   "ChatFrame_AddMessageEventFilter",
+  "GetPVPSessionStats",
+  "GetAccountExpansionLevel",
   "GetNumFactions",
   "GetFactionInfo",
   "GetNumSkillLines",
