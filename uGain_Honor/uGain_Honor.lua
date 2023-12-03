@@ -27,7 +27,7 @@ local function uHonor_TrackBgHonor(honorGain)
     return " - BG Honor " .. uC("+" .. uShared_StringComma(currentBgHonor), C.dark)
 end
 
-local function uHonor_getCurrent() 
+local function uHonor_getCurrent()
     -- TBC / Wotlk
     local honorCurrency = C_CurrencyInfo.GetCurrencyInfo(HonorCurrencyId)
     if honorCurrency ~= nil then
@@ -35,7 +35,7 @@ local function uHonor_getCurrent()
     end
 
     -- Classic Era
-    if GetPVPSessionStats ~= nil then 
+    if GetPVPSessionStats ~= nil then
         local hk, currenHonor = GetPVPSessionStats()
         return currenHonor
     end
@@ -52,10 +52,16 @@ local function uHonor_OnHonorGain(text)
     end
 
     local honorGainPattern = uShared_GetSearchPattern("COMBATLOG_HONORGAIN")
-    local honorGainMatch, _, playerName, _, honorGain = string.find(text, honorGainPattern)
+    local honorGainMatch, _, playerName, unitRank, honorGain = string.find(text, honorGainPattern)
     if (honorGainMatch) then
-        local message = uC("+" .. uShared_StringComma(honorGain), C.dark) .. " Honor " .. uC(playerName, C.light) ..
-                            " killed" .. currentHonorText .. uHonor_TrackBgHonor(honorGain) .. "."
+        local message = uC("+" .. uShared_StringComma(honorGain), C.dark) .. " Honor "
+
+        if GetAccountExpansionLevel() == 0 then
+            message = message .. unitRank .. " "
+        end
+
+        message = message .. uC(playerName, C.light) .. " killed " ..
+            currentHonorText .. uHonor_TrackBgHonor(honorGain) .. "."
 
         uShared_PrintAll("CHAT_MSG_COMBAT_HONOR_GAIN", message)
         return
@@ -66,7 +72,7 @@ local function uHonor_OnHonorGain(text)
 
     if (honorAwardMatch) then
         local message = uC("+" .. uShared_StringComma(honorAward), C.dark) .. " Honor" .. currentHonorText ..
-                            uHonor_TrackBgHonor(honorAward) .. "."
+            uHonor_TrackBgHonor(honorAward) .. "."
 
         uShared_PrintAll("CHAT_MSG_COMBAT_HONOR_GAIN", message)
         return
@@ -101,4 +107,3 @@ ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_HONOR_GAIN", uHonor_FiltertHono
 
 -- Classic Era
 -- uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (Estimated Honor Points: 8)')
-
