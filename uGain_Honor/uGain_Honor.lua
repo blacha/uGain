@@ -27,8 +27,24 @@ local function uHonor_TrackBgHonor(honorGain)
     return " - BG Honor " .. uC("+" .. uShared_StringComma(currentBgHonor), C.dark)
 end
 
+local function uHonor_getCurrent() 
+    -- TBC / Wotlk
+    local honorCurrency = C_CurrencyInfo.GetCurrencyInfo(HonorCurrencyId)
+    if honorCurrency ~= nil then
+        return honorCurrency.quantity or 0
+    end
+
+    -- Classic Era
+    if GetPVPSessionStats ~= nil then 
+        local hk, currenHonor = GetPVPSessionStats()
+        return currenHonor
+    end
+
+    return 0
+end
+
 local function uHonor_OnHonorGain(text)
-    local currentHonor = C_CurrencyInfo.GetCurrencyInfo(HonorCurrencyId).quantity or 0
+    local currentHonor = uHonor_getCurrent();
 
     local currentHonorText = ""
     if currentHonor > 0 then
@@ -67,11 +83,9 @@ eventFrame:RegisterEvent("ZONE_CHANGED")
 eventFrame:RegisterEvent("ZONE_CHANGED_NEW_AREA")
 
 eventFrame:SetScript("OnEvent", function(self, eventName, ...)
-
     if eventName == "CHAT_MSG_COMBAT_HONOR_GAIN" then
         uHonor_OnHonorGain(...)
     else
-        -- print("OtherEvent:" .. eventName)
         uHonor_TrackBgHonor()
     end
 end)
@@ -82,5 +96,9 @@ local function uHonor_FiltertHonorGain(self, event, msg, ...)
 end
 ChatFrame_AddMessageEventFilter("CHAT_MSG_COMBAT_HONOR_GAIN", uHonor_FiltertHonorGain)
 
+-- TBC/Wotlk
 -- uHonor_OnHonorGain('You have been awarded 85 honor points.')
--- uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (8 Honor Points)')
+
+-- Classic Era
+-- uHonor_OnHonorGain('Player dies, honorable kill Rank: Private (Estimated Honor Points: 8)')
+
