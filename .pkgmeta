@@ -5,7 +5,7 @@ move-folders:
   uGain/uGain_Honor: uGain_Honor
   uGain/uGain_Rep: uGain_Rep
   uGain/uGain_Skill: uGain_Skill
-  uGain/uGain_Money: uGain_Money
+  uGain/uGain_Currency: uGain_Currency
 
 
 ignore: 

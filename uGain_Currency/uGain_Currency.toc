@@ -6,10 +6,10 @@
 ## X-Curse-Project-ID: 487894
 ## X-Wago-ID: kaNeBk62
 
-## Title: uGain_Money
+## Title: uGain_Currency
 ## Notes: Simple light weight addon to display gold changes in your Chat Frame.
 ## Author: Blayne 
 ## Dependencies: uGain
 ## Version: @project-version@
 
-uGain_Money.lua
+uGain_Currency.lua
