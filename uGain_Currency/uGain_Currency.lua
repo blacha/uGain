@@ -33,6 +33,9 @@ local function uCurrency_scanAndReport()
     local currentMoney = GetMoney()
     if LastMoney > -1 then
         local moneyDiff = currentMoney - LastMoney
+        if moneyDiff == 0 then
+            return
+        end
         uShared_PrintAll("CHAT_MSG_MONEY", uCurrency_formatMoneyGainLoss(moneyDiff) .. " (current: " .. uCurrency_formatMoney(currentMoney) .. ")")
     end
     LastMoney = currentMoney
