@@ -1,4 +1,3 @@
-
 std = "lua51"
 max_line_length = false
 exclude_files = {
@@ -10,6 +9,13 @@ ignore = {
   "121",
 }
 
+globals = {
+  "uGainDB",
+  "SLASH_UGAIN1",
+  "SLASH_UGAIN2",
+  "SlashCmdList",
+}
+
 read_globals = {
   "abs",
   "floor",
@@ -19,6 +25,7 @@ read_globals = {
   "UnitXP",
   "UnitXPMax",
   "UnitLevel",
+  "MAX_PLAYER_LEVEL",
   "CreateFrame",
   "ChatFrame_AddMessageEventFilter",
   "GetPVPSessionStats",
@@ -28,10 +35,15 @@ read_globals = {
   "GetNumSkillLines",
   "GetSkillLineInfo",
   "NUM_CHAT_WINDOWS",
+  "DEFAULT_CHAT_FRAME",
+  "UIParent",
+  "Settings",
+  "InterfaceOptions_AddCategory",
+  "InterfaceOptionsFrame_OpenToCategory",
+  "C_CurrencyInfo",
+  "C_PvP",
   "uC",
   "uShared_StringComma",
   "uShared_GetSearchPattern",
   "uShared_PrintAll",
-  "C_CurrencyInfo",
-  "C_PvP"
 }
