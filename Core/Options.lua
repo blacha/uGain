@@ -37,6 +37,7 @@ local function CreateOptionsPanel()
             uGain.SetModuleEnabled(self.moduleKey, isChecked)
         end)
 
+        cb:SetChecked(uGain.IsModuleEnabled(mod.key))
         checkboxes[mod.key] = cb
         yOffset = yOffset - 32
     end
@@ -56,9 +57,8 @@ local function CreateOptionsPanel()
     -- Register with Blizzard Settings API (Modern & Classic fallback)
     if Settings and Settings.RegisterCanvasLayoutCategory then
         local category = Settings.RegisterCanvasLayoutCategory(panel, panel.name)
-        category.ID = panel.name
         Settings.RegisterAddOnCategory(category)
-        panel.settingsCategoryID = category.ID
+        panel.settingsCategoryID = category:GetID()
     elseif InterfaceOptions_AddCategory then
         InterfaceOptions_AddCategory(panel)
     end

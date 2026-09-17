@@ -1,7 +1,7 @@
 local addonName, uGain = ...
 
-local uXp_CurrentExp = 0
-local uXp_CurrentLevel = 0
+local uXp_CurrentExp = UnitXP("player") or 0
+local uXp_CurrentLevel = UnitLevel("player") or 0
 
 local function uXp_FormatChatMessage(xpChange, currentXp, nextLevelXp, nextLevel)
     local remainingXp = nextLevelXp - currentXp
@@ -23,6 +23,19 @@ local function uXp_FormatChatMessage(xpChange, currentXp, nextLevelXp, nextLevel
     return xpGain .. xpToNextLevel .. xpLeft .. xpReps
 end
 
+local function uXp_IsMaxLevel(level, nextLevelXp)
+    if not nextLevelXp or nextLevelXp == 0 then
+        return true
+    end
+    if IsPlayerAtEffectiveMaxLevel and IsPlayerAtEffectiveMaxLevel() then
+        return true
+    end
+    if GetMaxLevelForPlayerExpansion and level >= GetMaxLevelForPlayerExpansion() then
+        return true
+    end
+    return false
+end
+
 local function uXp_ScanAndReportExp()
     if not uGain.IsModuleEnabled("xp") then
         return
@@ -33,7 +46,7 @@ local function uXp_ScanAndReportExp()
     local nextLevelXp = UnitXPMax("player")
 
     -- Skip if at max level or max XP is 0
-    if nextLevelXp == 0 or (MAX_PLAYER_LEVEL and currentLevel >= MAX_PLAYER_LEVEL) then
+    if uXp_IsMaxLevel(currentLevel, nextLevelXp) then
         return
     end
 
@@ -59,12 +72,14 @@ local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("PLAYER_XP_UPDATE")
 eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
-eventFrame:SetScript("OnEvent", function(self, event)
+eventFrame:SetScript("OnEvent", function(self, event, unitTarget)
     if event == "PLAYER_ENTERING_WORLD" then
-        uXp_CurrentExp = UnitXP("player")
-        uXp_CurrentLevel = UnitLevel("player")
+        uXp_CurrentExp = UnitXP("player") or 0
+        uXp_CurrentLevel = UnitLevel("player") or 0
     elseif event == "PLAYER_XP_UPDATE" then
-        uXp_ScanAndReportExp()
+        if unitTarget == nil or unitTarget == "player" then
+            uXp_ScanAndReportExp()
+        end
     end
 end)
 

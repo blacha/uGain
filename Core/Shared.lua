@@ -49,9 +49,26 @@ function uGain.PrintAll(eventName, message)
     local frameFound = false
     for i = 1, NUM_CHAT_WINDOWS do
         local frame = _G["ChatFrame" .. i]
-        if frame and (frame:IsEventRegistered(eventName) or (i == NUM_CHAT_WINDOWS and not frameFound)) then
-            frame:AddMessage(message)
-            frameFound = true
+        if frame and frame:IsShown() and frame ~= _G["ChatFrame2"] then
+            if frame:IsEventRegistered(eventName) then
+                frame:AddMessage(message)
+                frameFound = true
+            elseif frame.messageTypeList then
+                for _, msgType in ipairs(frame.messageTypeList) do
+                    if eventName == "CHAT_MSG_" .. msgType or eventName:find(msgType, 1, true) then
+                        frame:AddMessage(message)
+                        frameFound = true
+                        break
+                    end
+                end
+            end
+        end
+    end
+
+    if not frameFound then
+        local defaultFrame = DEFAULT_CHAT_FRAME or _G["ChatFrame1"]
+        if defaultFrame then
+            defaultFrame:AddMessage(message)
         end
     end
 end
