@@ -21,18 +21,49 @@ local function uRep_StandingText(standingId)
     return uGain.Color(label, FACTION_BAR_COLORS[standingId] or uGain.C.white)
 end
 
+local function uRep_GetNumFactions()
+    if C_Reputation and C_Reputation.GetNumFactions then
+        return C_Reputation.GetNumFactions() or 0
+    elseif GetNumFactions then
+        return GetNumFactions() or 0
+    end
+    return 0
+end
+
+local function uRep_GetFactionInfo(index)
+    if C_Reputation and C_Reputation.GetFactionDataByIndex then
+        local data = C_Reputation.GetFactionDataByIndex(index)
+        if data then
+            return data.name, data.description, data.reaction, data.currentReactionThreshold, data.nextReactionThreshold, data.currentStanding, data.atWarWith, data.canToggleAtWar, data.isHeader
+        end
+        return nil
+    elseif GetFactionInfo then
+        return GetFactionInfo(index)
+    end
+    return nil
+end
+
 local function uRep_ReportFaction(factionIndex)
     if not uGain.IsModuleEnabled("reputation") then
         return nil
     end
 
-    local name, _, standingId, barMin, barMax, currentRep, _, _, isHeader = GetFactionInfo(factionIndex)
+    local name, _, standingId, barMin, barMax, currentRep, _, _, isHeader = uRep_GetFactionInfo(factionIndex)
     if isHeader or not name then
         return nil
     end
 
+    standingId = standingId or 1
+    barMin = barMin or 0
+    barMax = barMax or 0
+    currentRep = currentRep or 0
+
     local faction = Factions[name]
     if not faction then
+        Factions[name] = {
+            currentRep = currentRep,
+            standingId = standingId,
+        }
         return nil
     end
 
@@ -86,22 +117,22 @@ local function uRep_ReportFaction(factionIndex)
 end
 
 local function uRep_LoadFactions()
-    FactionCount = GetNumFactions()
+    FactionCount = uRep_GetNumFactions()
 
     for i = 1, FactionCount do
-        local name, _, standingId, _, _, currentRep, _, _, isHeader = GetFactionInfo(i)
+        local name, _, standingId, _, _, currentRep, _, _, isHeader = uRep_GetFactionInfo(i)
         if name and not isHeader then
             if not Factions[name] then
                 Factions[name] = {}
             end
-            Factions[name].currentRep = currentRep
-            Factions[name].standingId = standingId
+            Factions[name].currentRep = currentRep or 0
+            Factions[name].standingId = standingId or 1
         end
     end
 end
 
 local function uRep_ScanAndReport()
-    local currentFactionCount = GetNumFactions()
+    local currentFactionCount = uRep_GetNumFactions()
     if currentFactionCount ~= FactionCount then
         return uRep_LoadFactions()
     end

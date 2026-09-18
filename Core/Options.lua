@@ -8,6 +8,7 @@ local MODULES = {
     { key = "reputation", label = "Reputation gains and reps to next standing",    cmd = "rep" },
     { key = "skill",      label = "Skill point gains",                              cmd = "skill" },
     { key = "currency",   label = "Money / Currency changes",                       cmd = "currency" },
+    { key = "loot",       label = "Loot item gains, stacks and bag capacity",       cmd = "loot" },
 }
 
 local checkboxes = {}
@@ -92,7 +93,7 @@ local function PrintHelp()
     DEFAULT_CHAT_FRAME:AddMessage(uGain.Color("uGain Slash Commands:", uGain.C.medium))
     DEFAULT_CHAT_FRAME:AddMessage("  /ugain           - Open settings panel")
     DEFAULT_CHAT_FRAME:AddMessage("  /ugain status    - Display module status")
-    DEFAULT_CHAT_FRAME:AddMessage("  /ugain <module>  - Toggle module (xp, honor, bghonor, rep, skill, currency)")
+    DEFAULT_CHAT_FRAME:AddMessage("  /ugain <module>  - Toggle module (xp, honor, bghonor, rep, skill, currency, loot)")
 end
 
 local function HandleSlashCommand(msg)

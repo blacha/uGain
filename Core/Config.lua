@@ -8,6 +8,7 @@ uGain.DefaultSettings = {
     reputation = true,
     skill = true,
     currency = true,
+    loot = true,
 }
 
 -- Initialize SavedVariables

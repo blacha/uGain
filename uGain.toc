@@ -3,12 +3,13 @@
 ## Interface-BCC: 20504
 ## Interface-Wrath: 30403
 ## Interface-Cata: 40400
+## Interface-Retail: 110200
 
 ## X-Curse-Project-ID: 487894
 ## X-Wago-ID: kaNeBk62
 
 ## Title: uGain
-## Notes: Lightweight addon to display pretty chat gains for XP, Honor, Rep, Skill, and Currency.
+## Notes: Lightweight addon to display pretty chat gains for XP, Honor, Rep, Skill, Currency, and Loot.
 ## Author: Blayne
 ## Version: @project-version@
 ## SavedVariables: uGainDB
@@ -22,3 +23,4 @@ Modules/Honor.lua
 Modules/Reputation.lua
 Modules/Skill.lua
 Modules/Currency.lua
+Modules/Loot.lua

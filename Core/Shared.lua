@@ -11,9 +11,11 @@ uGain.C = {
     negative = "|cffe25e6f",
     white    = "|cffffffff",
     yellow   = "|cffffff78",
-    orange   = "|cffff7831",
-    red      = "|cfff8a3a8",
-    resume   = "|r"
+    orange     = "|cffff7831",
+    red        = "|cfff8a3a8",
+    green      = "|cff78dc78",
+    lightGreen = "|cffa8f0a8",
+    resume     = "|r"
 }
 
 -- Format text with a WoW color code
@@ -47,15 +49,17 @@ end
 -- Print a message to all chat windows registered for the event
 function uGain.PrintAll(eventName, message)
     local frameFound = false
-    for i = 1, NUM_CHAT_WINDOWS do
+    local maxWindows = NUM_CHAT_WINDOWS or 10
+    for i = 1, maxWindows do
         local frame = _G["ChatFrame" .. i]
         if frame and frame:IsShown() and frame ~= _G["ChatFrame2"] then
-            if frame:IsEventRegistered(eventName) then
+            if frame.IsEventRegistered and frame:IsEventRegistered(eventName) then
                 frame:AddMessage(message)
                 frameFound = true
             elseif frame.messageTypeList then
-                for _, msgType in ipairs(frame.messageTypeList) do
-                    if eventName == "CHAT_MSG_" .. msgType or eventName:find(msgType, 1, true) then
+                for k, v in pairs(frame.messageTypeList) do
+                    local msgType = type(k) == "string" and k or v
+                    if type(msgType) == "string" and (eventName == "CHAT_MSG_" .. msgType or eventName:find(msgType, 1, true)) then
                         frame:AddMessage(message)
                         frameFound = true
                         break
