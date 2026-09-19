@@ -7,6 +7,7 @@ uGain.DefaultSettings = {
     bgHonor = true,
     reputation = true,
     skill = true,
+    money = true,
     currency = true,
     loot = true,
 }
@@ -15,6 +16,10 @@ uGain.DefaultSettings = {
 function uGain.InitDB()
     if not uGainDB then
         uGainDB = {}
+    end
+    -- Migrate previous 'currency' setting to 'money' if money is not yet set
+    if uGainDB.money == nil and uGainDB.currency ~= nil then
+        uGainDB.money = uGainDB.currency
     end
     for key, val in pairs(uGain.DefaultSettings) do
         if uGainDB[key] == nil then

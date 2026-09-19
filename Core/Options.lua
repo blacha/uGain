@@ -7,7 +7,8 @@ local MODULES = {
     { key = "bgHonor",    label = "Battleground cumulative honor tracker",          cmd = "bghonor" },
     { key = "reputation", label = "Reputation gains and reps to next standing",    cmd = "rep" },
     { key = "skill",      label = "Skill point gains",                              cmd = "skill" },
-    { key = "currency",   label = "Money / Currency changes",                       cmd = "currency" },
+    { key = "money",      label = "Money (Gold / Silver / Copper) changes",         cmd = "money" },
+    { key = "currency",   label = "Currency token gains and weekly caps",           cmd = "currency" },
     { key = "loot",       label = "Loot item gains, stacks and bag capacity",       cmd = "loot" },
 }
 
@@ -93,7 +94,7 @@ local function PrintHelp()
     DEFAULT_CHAT_FRAME:AddMessage(uGain.Color("uGain Slash Commands:", uGain.C.medium))
     DEFAULT_CHAT_FRAME:AddMessage("  /ugain           - Open settings panel")
     DEFAULT_CHAT_FRAME:AddMessage("  /ugain status    - Display module status")
-    DEFAULT_CHAT_FRAME:AddMessage("  /ugain <module>  - Toggle module (xp, honor, bghonor, rep, skill, currency, loot)")
+    DEFAULT_CHAT_FRAME:AddMessage("  /ugain <module>  - Toggle module (xp, honor, bghonor, rep, skill, money, currency, loot)")
 end
 
 local function HandleSlashCommand(msg)
@@ -123,8 +124,10 @@ local function HandleSlashCommand(msg)
         end
     end
 
-    -- Support "money" as alias for currency
-    if cmd == "money" then
+    -- Support aliases
+    if cmd == "gold" then
+        targetKey = "money"
+    elseif cmd == "token" or cmd == "tokens" or cmd == "currencies" then
         targetKey = "currency"
     end
 
